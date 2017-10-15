@@ -1,0 +1,34 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  {% if name %}
+  <p>
+    {{name}}
+  </p>
+  {% endif %}
+  {% if stage==1 %}
+  <h1>Sign In</h1>
+  <form action="" method="post" name="login">
+      {{ form.hidden_tag() }}
+      <p>
+          Please enter your name:<br>
+          {{ form.person(size=80) }}<br>
+      </p>
+      <p>
+          Please enter your company:<br>
+          {{ form.company(size=80)}}<br>
+      </p> 
+      <p><input type="submit" value="Sign In"></p>
+  </form>
+  {% elif stage==2 %}
+  <form action="" method = "post" name = "pick">
+      {{ form.hidden_tag()}}
+      <p>
+          Query by titles or skills?<br>
+          {{ form.titles_or_skills }}<br>
+      </p>
+  {% endif %}
+  </form>
+
+{% endblock %}
