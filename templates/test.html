@@ -8,8 +8,6 @@
     
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
     
-    
-    
         <!--[if lte IE 8]>
             <link rel="stylesheet" href="css/layouts/side-menu-old-ie.css">
         <![endif]-->
@@ -21,7 +19,7 @@
 
 <div id="layout">
     <!-- Menu toggle -->
-    <form onSubmit="return changeWeek()" = "week_chooser">
+    <form onSubmit="return changeWeek()" id = "week_chooser">
       <select onchange = "this.form.submit()" name="week">
         <option value="1">Week 1</option>
         <option value="2">Week 2</option>
@@ -30,7 +28,7 @@
         <option value="4">Week 5</option>
       </select>
     </form>
-    
+
     <a href="#menu" id="menuLink" class="menu-link">
         <!-- Hamburger icon -->
         <span></span>
