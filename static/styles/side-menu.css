@@ -9,8 +9,8 @@ body {
 
 #week_chooser {
     float:right;
-/*    position:relative;
-    z-index: -1; */
+    position:relative;
+    z-index: -1; 
 }
 
 

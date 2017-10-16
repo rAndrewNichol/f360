@@ -9,7 +9,7 @@ def home():
 							title = "Home")
 @gui.route('/test')
 def test():
-	return render_template('test.html',title='PLEASEWORK')
+	return render_template('test.html',title='ya')
 
 if __name__ == "__main__":
 	api.run()
