@@ -20,7 +20,7 @@
 
 <div id="layout">
 
-    <form onSubmit="return changeWeek()" style="float:right">
+    <form onSubmit="return changeWeek()" id = "changeForm" style="float:right;padding-right:125px;padding-top:70px">
       <select onchange = "this.form.submit()" name="week">
         <option value="1">Week 1</option>
         <option value="2">Week 2</option>
@@ -29,6 +29,7 @@
         <option value="4">Week 5</option>
       </select>
     </form>
+
 
     <!-- Menu toggle -->
 
@@ -62,7 +63,7 @@
     </div>
 
     <div id="main">
-        <div class="header">
+        <div class="header" style="padding-left: 125px">
             <h1>360 TA Feedback Hub</h1>
         </div>
 
