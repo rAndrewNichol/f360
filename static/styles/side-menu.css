@@ -36,7 +36,7 @@ This is the parent `<div>` that contains the menu and the content area.
     #layout.active .menu-link {
         left: 150px;
     }
-    
+
 /*
 The content `<div>` is where all your content goes.
 */

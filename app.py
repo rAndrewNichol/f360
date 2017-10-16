@@ -1,5 +1,5 @@
-
 from flask import Flask, jsonify, request, render_template, redirect
+
 gui = Flask(__name__)
 gui.config.from_object('config')
 
@@ -15,7 +15,8 @@ def test():
 @gui.route('/<team>')
 def team1(team):
 	#keep params somehow?
-	return render_template(team + '.html')
+	data = {"team":3, "name":"Andrew Nichol","q1":5,"q2":3}
+	return render_template(team + '.html', data = data)
 
 if __name__ == "__main__":
 	gui.run()
