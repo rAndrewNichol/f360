@@ -11,7 +11,7 @@ body {
     float:right;
     z-index: -1; 
     position:relative;
-    left: 30px;
+    /*left: 30px;*/
 }
 /*
 Add transition to containers so they can push in and out.

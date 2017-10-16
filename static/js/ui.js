@@ -5,6 +5,18 @@
         menuLink = document.getElementById('menuLink'),
         content  = document.getElementById('main');
 
+    function changeWeek(){
+        var w = document.getElementById('week');
+        var url = window.location.href;    
+        if (url.indexOf('?') != -1){
+            url = url.slice(0,url.indexOf('?'))
+            url += '?week=' + w
+        }else{
+            url += '?week=' + w
+        }
+        window.location.href = url;
+    }
+
     function toggleClass(element, className) {
         var classes = element.className.split(/\s+/),
             length = classes.length,
