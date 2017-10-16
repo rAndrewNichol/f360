@@ -6,7 +6,7 @@
     <meta name="description" content="An example layout for the TA hub...">
     <title>Hello Mudit!</title>
     
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/styles/pure.css" integrity="sha384-" crossorigin="anonymous">
     
         <!--[if lte IE 8]>
             <link rel="stylesheet" href="css/layouts/side-menu-old-ie.css">
@@ -14,13 +14,13 @@
         <!--[if gt IE 8]><!-->
             <link rel="stylesheet" href="static/styles/side-menu.css">
         <!--<![endif]-->
+
 </head>
 <body>
 
 <div id="layout">
 
-    <!-- Menu toggle -->
-    <form onSubmit="return changeWeek()" id = "week_chooser">
+    <form onSubmit="return changeWeek()" style="float:right">
       <select onchange = "this.form.submit()" name="week">
         <option value="1">Week 1</option>
         <option value="2">Week 2</option>
@@ -29,6 +29,8 @@
         <option value="4">Week 5</option>
       </select>
     </form>
+
+    <!-- Menu toggle -->
 
     <a href="#menu" id="menuLink" class="menu-link">
         <!-- Hamburger icon -->
@@ -62,15 +64,11 @@
     <div id="main">
         <div class="header">
             <h1>360 TA Feedback Hub</h1>
-            <!-- <h2>A subtitle for your page goes here</h2> -->
         </div>
 
         <div class="content">
             <h1 class="content-subhead">Select the team in the sidebar who's team feedback you would like to see.</h1>
-            <!-- <p>
-                To use this layout, you can just copy paste the HTML, along with the CSS in <a href="{{ url_for('static',filename='styles/side-menu.css') }}"alt="Side Menu CSS">side-menu.css</a>, and the JavaScript in <a href="/js/ui.js">ui.js</a>. The JS file uses vanilla JavaScript to simply toggle an <code>active</code> class that makes the menu responsive.
-            </p>
-              -->   
+
             <center><img src="https://pwgtraining.co.uk/wp-content/uploads/2016/10/PWG-360-degrees-reviews-300x225.png" align="middle"></center>
         
           <!--   <h2 class="content-subhead">Here's Some Example Bullshit</h2>
@@ -100,9 +98,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 <script src="{{ url_for('static',filename='js/ui.js') }}"></script>
 

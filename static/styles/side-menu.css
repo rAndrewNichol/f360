@@ -7,13 +7,6 @@ body {
     height: auto;
 }
 
-#week_chooser {
-    float:right;
-    position:relative;
-    z-index: -1;
-}
-
-
 /*
 Add transition to containers so they can push in and out.
 */
@@ -43,6 +36,8 @@ This is the parent `<div>` that contains the menu and the content area.
     #layout.active .menu-link {
         left: 150px;
     }
+
+
 /*
 The content `<div>` is where all your content goes.
 */
