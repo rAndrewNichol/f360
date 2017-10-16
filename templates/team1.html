@@ -73,7 +73,10 @@
         </div>
 
         <div class="content">
-            <h1 class="content-subhead">HERE IS THE TEAM'S INFO!</h1>
+            <h1 class="content-subhead" id='TEST'>HERE IS THE TEAM'S INFO!</h1>
+            <script>
+                document.getElementById("TEST").innerHTML = "HERE IS TEAM " + {{data[1][0]}} + "'S INFO!";
+            </script>
 
             <center><img src="https://pwgtraining.co.uk/wp-content/uploads/2016/10/PWG-360-degrees-reviews-300x225.png" align="middle"></center>
         

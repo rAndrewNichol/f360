@@ -15,8 +15,8 @@ def test():
 @gui.route('/<team>')
 def team1(team):
 	#keep params somehow?
-	data = {"team":3, "name":"Andrew Nichol","q1":5,"q2":3}
-	return render_template(team + '.html', data = data)
+	data = [[3, "Andrew Nichol",5,3],[1, "Will Sheng",2,4]]
+	return render_template(team + '.html', data=data)
 
 if __name__ == "__main__":
 	gui.run()
