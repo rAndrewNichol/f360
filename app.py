@@ -5,11 +5,8 @@ gui = Flask(__name__)
 gui.config.from_object('config')
 
 # url = 'mysql://bda0f11ccb424e:1e1bf253@us-cdbr-iron-east-05.cleardb.net/heroku_55f2adb0c8d05ac?reconnect=true'
-
-# @gui.route('/')
-# def home():
-# 	return render_template('homepage.html',
-# 							title = "Home")
+# table creation : cursor.execute('create table responses(id int auto_increment primary key,dat VARCHAR(12),
+#what int,start_time VARCHAR(20),end_time VARCHAR(20),net_id VARCHAR(12));')
 
 @gui.route('/')
 # @gui.route('/home')

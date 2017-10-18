@@ -18,6 +18,7 @@
     <form onSubmit="return changeWeek()" id = "changeForm" style="float:right;padding-right:25px;padding-top:50px">
       <select onchange = "this.form.submit()" name="week">
         <option value="" selected disabled hidden id="current_week">Week</option>
+        <option value="0">All</option>
         <option value="1">Week 1</option>
         <option value="2">Week 2</option>
         <option value="3">Week 3</option>
@@ -29,11 +30,18 @@
     <script>
     var url = new URL(window.location.href);
     var week = url.searchParams.get("week");
+    var output;
     if(week==null){
         // could also do default week 1 or maximum week here.
-        week = "";
+        output = "Week";
     }
-    document.getElementById("current_week").innerHTML = "Week " + week;
+    else if(week==0){
+        output = "All";
+    }
+    else{
+        output = "Week " + week;
+    }
+    document.getElementById("current_week").innerHTML = output;
     </script>
 
 
