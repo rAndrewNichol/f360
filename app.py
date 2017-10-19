@@ -1,5 +1,5 @@
-from flask import Flask, jsonify, request, render_template, redirect
-import pymysql
+from flask import Flask, jsonify, request, render_template, session, abort, redirect
+import pymysql, os
 
 gui = Flask(__name__)
 gui.config.from_object('config')
@@ -8,10 +8,22 @@ gui.config.from_object('config')
 # table creation : cursor.execute('create table responses(id int auto_increment primary key,dat VARCHAR(12),
 #what int,start_time VARCHAR(20),end_time VARCHAR(20),net_id VARCHAR(12));')
 
+ 
+@gui.route('/login', methods=['POST'])
+def do_admin_login():
+	if request.form['password'] == 'password' and request.form['username'] == 'admin':
+		session['logged_in'] = True
+	else:
+		flash('wrong password!')
+	return home()
+
 @gui.route('/')
-# @gui.route('/home')
-def test():
-	return render_template('test.html')
+def home():
+	if not session.get('logged_in'):
+		return render_template('login.html')
+	else:
+		return render_template('test.html')
+
 
 @gui.route('/<team>',methods=['GET'])
 def team1(team):
@@ -25,4 +37,5 @@ def team1(team):
 	return render_template(team + '.html', data=data, week = week)
 
 if __name__ == "__main__":
+	gui.secret_key = os.urandom(12)
 	gui.run()
