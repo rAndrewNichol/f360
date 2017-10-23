@@ -24,7 +24,7 @@
 <div id="layout">
 
 
-    <form onSubmit="return changeWeek()" id = "changeForm" style="float:right;padding-right:25px;padding-top:50px">
+    <form onSubmit="return changeWeek()" id = "changeForm" style="float:right;padding-right:40px;padding-top:50px">
       <select onchange = "this.form.submit()" name="week">
         <option value="" selected disabled hidden id="current_week">Week</option>
         <option value="0">All</option>
@@ -54,6 +54,12 @@
     </script>
 
 
+    <div style = "float:left;padding-left:20px">
+        <form action="/logout">
+        <p>Welcome {{current_user.name}}!</p>
+        <input type="submit" value="Logout"/>
+        </form>
+    </div>
     <!-- Menu toggle -->
 
     <a href="#menu" id="menuLink" class="menu-link">
@@ -85,8 +91,8 @@
     </div>
 
     <div id="main">
-        <div class="header" style="padding-left: 40px">
-            <h1>Team 1</h1>
+        <div class="header">
+            <h1 style="padding-right: 120px">Team 1</h1>
         </div>
 
         <div class="content">
@@ -100,7 +106,7 @@
 
             <center><img src="https://pwgtraining.co.uk/wp-content/uploads/2016/10/PWG-360-degrees-reviews-300x225.png" align="middle"></center> -->
 
-            <div id="container" style="width: 93%;padding-top: 25px">
+            <div id="container" style="width: 95%;padding-top: 40px">
                 <canvas id="canvas"></canvas>
             </div>
  <!--            <button id="randomizeData">Randomize Data</button>
