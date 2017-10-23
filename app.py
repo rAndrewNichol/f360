@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, render_template, session, abort, redirect, url_for, Response
 import pymysql
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 gui = Flask(__name__)
 gui.config.from_object('config')
@@ -32,6 +32,8 @@ def load_user(user_id):
  
 @gui.route('/login', methods=['GET','POST'])
 def login():
+	if current_user.is_authenticated:
+			return redirect('/')
 	if request.method == 'POST':
 		username = request.form['username']
 		password = request.form['password']
@@ -41,13 +43,7 @@ def login():
 				return redirect(request.args.get("next"))
 		return abort(401)
 	else:
-		return Response('''
-		<form action="" method="post">
-			<p><input type=text name=username>
-			<p><input type=password name=password>
-			<p><input type=submit value=Login>
-		</form>
-		''')
+		return render_template('login.html')
 
 @gui.route('/logout')
 @login_required
@@ -68,6 +64,9 @@ def page_not_found(e):
 @gui.route('/<team>',methods=['GET'])
 @login_required
 def teams(team):
+	if team not in ['team1','team2','team3','team4','team5','team6','team8','team9','team10']:
+		return redirect('/')
+	#TODO: control for invalid index
 	# db = pymysql.connect(host='us-cdbr-iron-east-05.cleardb.net',port='',user='bda0f11ccb424e',passwd='1e1bf253',db='heroku_55f2adb0c8d05ac')
 	# cur = db.cursor()
 	# cur.execute("SELECT * FROM responses;")
