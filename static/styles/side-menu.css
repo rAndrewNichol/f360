@@ -249,7 +249,7 @@ Hides the menu at `48em`, but modify this based on your app's needs.
 }
 
 .dropbtn {
-    background-color: #4CAF50;
+    background-color: #2890D1;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -260,8 +260,8 @@ Hides the menu at `48em`, but modify this based on your app's needs.
 .dropdown {
     position: relative;
     float:right;
-    left:75px;
-    top:25px;
+    left:50px;
+    top:30px;
     display: inline-block;
 }
 
@@ -269,7 +269,7 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 150px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -288,5 +288,5 @@ Hides the menu at `48em`, but modify this based on your app's needs.
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+    background-color: #175d8c;
 }
