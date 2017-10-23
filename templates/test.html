@@ -15,7 +15,7 @@
 <div id="layout">
 
 
-    <form onSubmit="return changeWeek()" id = "changeForm" style="float:right;padding-right:25px;padding-top:50px">
+    <form onSubmit="return changeWeek()" id = "changeForm" style="float:right;padding-right:40px;padding-top:50px">
       <select onchange = "this.form.submit()" name="week">
         <option value="" selected disabled hidden id="current_week">Week</option>
         <option value="0">All</option>
@@ -45,7 +45,7 @@
     </script>
 
 
-    <div style = "float:right">
+    <div style = "float:left;padding-left:20px">
         <form action="/logout">
         <p>Welcome {{current_user.name}}!</p>
         <input type="submit" value="Logout"/>
@@ -82,7 +82,7 @@
     </div>
 
     <div id="main">
-        <div class="header" style="padding-left: 30px">
+        <div class="header" style="padding-left: 20px">
             <h1>360 TA Feedback Hub</h1>
         </div>
 
