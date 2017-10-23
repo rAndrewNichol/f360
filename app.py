@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, render_template, session, abort, redirect, url_for, Response
-import pymysql, json
+import pymysql
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
 
 gui = Flask(__name__)

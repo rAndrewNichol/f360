@@ -6,8 +6,10 @@
     <meta name="description" content="An example layout for the TA hub...">
     <title>Hello Mudit!</title>
 
-    <script src="http://www.chartjs.org/dist/2.7.0/Chart.bundle.js"></script>
-    <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+<!--     <script src="http://www.chartjs.org/dist/2.7.0/Chart.bundle.js"></script>
+    <script src="http://www.chartjs.org/samples/latest/utils.js"></script> -->
+    <script src="{{ url_for('static',filename='js/chart.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/utils.js') }}"></script>
 
     <link rel="stylesheet" href="static/styles/pure.css" integrity="sha384-" crossorigin="anonymous">
     <link rel="stylesheet" href="static/styles/side-menu.css">
