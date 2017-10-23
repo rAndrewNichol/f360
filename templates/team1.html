@@ -106,7 +106,7 @@
             <div class="dropdown">
               <button class="dropbtn">Details</button>
               <div class="dropdown-content">
-                <a href="#">Andrew</a>
+                <a href="/team1/andrew">Andrew</a>
                 <a href="#">Judith</a>
                 <a href="#">Palak</a>
                 <a href="#">Cristofe</a>
@@ -132,8 +132,7 @@
                             32,
                             45,
                             100,
-                            68,
-                            0
+                            68
                         ]
                     }, {
                         label: 'Peer Score',
@@ -145,8 +144,7 @@
                             97,
                             37,
                             40,
-                            80,
-                            0
+                            80
                         ]
                     }]
 
@@ -167,8 +165,14 @@
                                     ticks: {
                                         fontSize: 17
                                     }
+                                }],
+                                yAxes: [{
+                                    ticks:{
+                                        suggestedMin:0,
+                                        suggestedMax:100
+                                    }
                                 }]
-                            },
+                                },
                             title: {
                                 display: false,
                                 text: 'Week ' + {{week}} + ' Scores'
@@ -186,8 +190,6 @@
 </div>
 
 
-<script src="{{ url_for('static',filename='js/ui.js') }}"></script><!-- 
-<script src="http://www.chartjs.org/dist/2.7.0/Chart.bundle.js"></script>
-<script src="http://www.chartjs.org/samples/latest/utils.js"></script> -->
+<script src="{{ url_for('static',filename='js/ui.js') }}"></script>
 </body>
 </html>

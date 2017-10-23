@@ -52,7 +52,7 @@ def logout():
 	logout_user()
 	return redirect('/login')
 
-@gui.route('/None')
+# @gui.route('/None')
 @gui.route('/')
 @login_required
 def home():
@@ -65,6 +65,7 @@ def page_not_found(e):
 @gui.route('/<team>',methods=['GET'])
 @login_required
 def teams(team):
+	team = team.lower()
 	if team not in ['team1','team2','team3','team4','team5','team6','team8','team9','team10']:
 		return redirect('/')
 	#TODO: control for invalid index
@@ -79,6 +80,22 @@ def teams(team):
 	data = [[3, "Andrew Nichol",5,3],[3, "Palak Thakur",2,4]]
 	people = ["Andrew","Palak","Cristofe","Judith","Dana"]
 	return render_template(team + '.html', data=data, week = week, people = people)
+
+@gui.route('/<team>/<student>',methods=['GET'])
+@login_required
+def students(team,student):
+	team = team.lower()
+	if team not in ['team1','team2','team3','team4','team5','team6','team8','team9','team10']:
+		return redirect('/')
+	student = student.lower()
+	if student not in ['devina','franklin','andrew','rhett','gwynevere','siew','neha','sid','amy','kevin',
+						'william','judith','ishan','anthony','aayush','nitin','alex','sam','austin','fiona',
+						'christofe','pouriya','varun','mingyang','monika','anushree','vanessa','adam','dong eung',
+						'palak','pablo','faraz','jenny','yoonji','arturo','henry','tanvi','bryce','dana','manar',
+						'keith','itzel','aneesh','brad','kyle','aneesha','jonathan']:
+		return redirect('/')
+	score = 57
+	return render_template('student.html',student=student.title(), score = score)
 
 if __name__ == "__main__":
 	# gui.secret_key = os.urandom(12)

@@ -290,3 +290,18 @@ Hides the menu at `48em`, but modify this based on your app's needs.
 .dropdown:hover .dropbtn {
     background-color: #175d8c;
 }
+
+.overall{
+    position:relative;
+    right:100px;
+    top:7px;
+}
+
+#average{
+    font-size: 23pt;
+    font-weight: 300;   
+}
+#studentOverall{
+    color:#2890D1;
+    font-size:80pt;
+}
