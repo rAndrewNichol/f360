@@ -40,7 +40,8 @@ def login():
 		for user in users:
 			if username == user[1] and password == user[2]:
 				login_user(User(user[0]))
-				return redirect(request.args.get("next"))
+				# return redirect(request.args.get("next"))
+				return redirect('/')
 		return abort(401)
 	else:
 		return render_template('login.html')
