@@ -17,10 +17,6 @@
         window.location.href = url;
     }
 
-    // function getData(vars) {
-    //     return vars;
-    // }
-
     // function keepParams(e){
     //     e.preventDefault();
     //     window.location='/'+window.location.search;

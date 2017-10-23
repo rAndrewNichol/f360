@@ -106,14 +106,19 @@
 
             <center><img src="https://pwgtraining.co.uk/wp-content/uploads/2016/10/PWG-360-degrees-reviews-300x225.png" align="middle"></center> -->
 
-            <div id="container" style="width: 95%;padding-top: 40px">
+            <div class="dropdown">
+              <button class="dropbtn">Dropdown</button>
+              <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+              </div>
+            </div>
+
+            <div id="container" style="width: 95%;position:relative;">
                 <canvas id="canvas"></canvas>
             </div>
- <!--            <button id="randomizeData">Randomize Data</button>
-            <button id="addDataset">Add Dataset</button>
-            <button id="removeDataset">Remove Dataset</button>
-            <button id="addData">Add Data</button>
-            <button id="removeData">Remove Data</button> -->
+
             <script>
                 var color = Chart.helpers.color;
                 var barChartData = {

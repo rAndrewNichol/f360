@@ -6312,10 +6312,6 @@ defaults._set('bar', {
 		xAxes: [{
 			type: 'category',
 
-			// ticks: {
-			// 	fontSize: 40
-			// },
-
 			// Specific to Bar Controller
 			categoryPercentage: 0.8,
 			barPercentage: 0.9,
