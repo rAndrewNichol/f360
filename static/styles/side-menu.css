@@ -294,14 +294,13 @@ Hides the menu at `48em`, but modify this based on your app's needs.
 .overall{
     position:relative;
     right:100px;
-    top:7px;
 }
 
 #average{
-    font-size: 23pt;
+    font-size: 20pt;
     font-weight: 300;   
 }
 #studentOverall{
     color:#2890D1;
-    font-size:80pt;
+    font-size:75pt;
 }

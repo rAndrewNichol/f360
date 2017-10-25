@@ -52,7 +52,6 @@ def logout():
 	logout_user()
 	return redirect('/login')
 
-# @gui.route('/None')
 @gui.route('/')
 @login_required
 def home():
@@ -79,7 +78,10 @@ def teams(team):
 		week = 0;
 	data = [[3, "Andrew Nichol",5,3],[3, "Palak Thakur",2,4]]
 	people = ["Andrew","Palak","Cristofe","Judith","Dana"]
-	return render_template(team + '.html', data=data, week = week, people = people)
+	student = 'Andrew'
+	score = 57
+	scores = [57,64,12,23,80]
+	return render_template(team + '.html', data=data, week = week, people = people,student=student.title(), score = score,scores= scores)
 
 @gui.route('/<team>/<student>',methods=['GET'])
 @login_required
@@ -94,9 +96,8 @@ def students(team,student):
 						'palak','pablo','faraz','jenny','yoonji','arturo','henry','tanvi','bryce','dana','manar',
 						'keith','itzel','aneesh','brad','kyle','aneesha','jonathan']:
 		return redirect('/')
-	score = 57
-	return render_template('student.html',student=student.title(), score = score)
+	scores = [57,64,12,23,80,96]
+	return render_template('student.html',student=student.title(), scores = scores)
 
 if __name__ == "__main__":
-	# gui.secret_key = os.urandom(12)
 	gui.run()
