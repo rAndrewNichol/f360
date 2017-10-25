@@ -307,7 +307,7 @@ Hides the menu at `48em`, but modify this based on your app's needs.
 
 table {
     border-collapse: collapse;
-    width: 105%;
+    width: 95%;
 }
 
 th, td {
