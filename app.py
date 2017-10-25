@@ -75,7 +75,7 @@ def teams(team):
 	# db.close()
 	week = request.args.get('week')
 	if not week:
-		week = 0;
+		week = '0';
 	data = [[3, "Andrew Nichol",5,3],[3, "Palak Thakur",2,4]]
 	people = ["Andrew","Palak","Cristofe","Judith","Dana"]
 	student = 'Andrew'
