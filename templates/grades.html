@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An example layout for the TA hub...">
+    <title>Hello Mudit!</title>
+
+    <!-- <link rel="shortcut icon" href="{{ url_for('static', filename='images/360.ico') }}"> -->
+    
+    <link rel="stylesheet" href="static/styles/pure.css" integrity="sha384-" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/styles/side-menu.css">
+    <!-- <link rel="shortcut icon" href="https://s3.amazonaws.com/django-blog/ico/favicon_v2.ico"> -->
+
+</head>
+<body>
+
+<div id="layout">
+
+    <div style = "float:left;padding-left:20px">
+        <form action="/logout">
+        <p>Welcome {{current_user.name}}!</p>
+        <input type="submit" value="Logout"/>
+        </form>
+    </div>
+    <!-- Menu toggle -->
+
+    <a href="#menu" id="menuLink" class="menu-link">
+        <!-- Hamburger icon -->
+        <span></span>
+    </a>
+
+    <div id="menu">
+        <div class="pure-menu">
+            <a class="pure-menu-heading" href="javascript:void(null);" onclick="window.location='/'+window.location.search;">360</a>
+
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item"><a href="javascript:void(null);" onclick="window.location='/team1'+window.location.search;" class="pure-menu-link">Team 1</a></li>
+                <li class="pure-menu-item"><a href="javascript:void(null);" onclick="window.location='/team2'+window.location.search;" class="pure-menu-link">Team 2</a></li>
+                <li class="pure-menu-item"><a href="javascript:void(null);" onclick="window.location='/team3'+window.location.search;" class="pure-menu-link">Team 3</a></li>
+                <li class="pure-menu-item"><a href="javascript:void(null);" onclick="window.location='/team4'+window.location.search;" class="pure-menu-link">Team 4</a></li>
+                <li class="pure-menu-item"><a href="javascript:void(null);" onclick="window.location='/team5'+window.location.search;" class="pure-menu-link">Team 5</a></li>
+                <li class="pure-menu-item"><a href="javascript:void(null);" onclick="window.location='/team6'+window.location.search;" class="pure-menu-link">Team 6</a></li>
+<!--                 <li class="pure-menu-item"><a href="javascript:void(null);" onclick="window.location='/team7'+window.location.search;" class="pure-menu-link">Team 7</a></li> -->
+                <li class="pure-menu-item"><a href="javascript:void(null);" onclick="window.location='/team8'+window.location.search;" class="pure-menu-link">Team 8</a></li>
+                <li class="pure-menu-item"><a href="javascript:void(null);" onclick="window.location='/team9'+window.location.search;" class="pure-menu-link">Team 9</a></li>
+                <li class="pure-menu-item"><a href="javascript:void(null);" onclick="window.location='/team10'+window.location.search;" class="pure-menu-link">Team 10</a></li>
+                <li class="pure-menu-item"><a href="javascript:void(null);" onclick="window.location='/grades'+window.location.search;" class="pure-menu-link">Grades</a></li>
+                <!--  <li class="pure-menu-item" class="menu-item-divided pure-menu-selected">
+                    <a href="#" class="pure-menu-link">Team 3</a>
+                </li> -->
+
+            </ul>
+        </div>
+    </div>
+
+    <div id="main">
+        <div class="header" style="position:relative;right:50px;">
+            <h1>Grade Summary</h1>
+        </div>
+
+        <div class="content">
+
+            <table id = "gradeTable" style='position:relative;top:35px;'>
+              <tr>
+                <th>Student</th>
+                <th>Feedbacks Missed</th>
+                <th>Overall Score</th>
+                <th>Suggested Grade</th>
+              </tr>
+              <tr>
+                <td>Andrew Nichol</td>
+                <td>0</td>
+                <td>67</td>
+                <td>83</td>
+              </tr>
+              <tr>
+                <td>Judith Syau</td>
+                <td>1</td>
+                <td>42</td>
+                <td>64</td>
+              </tr>
+              <tr>
+                <td>Palak Thakur</td>
+                <td>0</td>
+                <td>80</td>
+                <td>89</td>
+              </tr>
+            </table>
+
+            <script type="text/javascript">
+                function selectElementContents(el) {
+                    var body = document.body, range, sel;
+                    if (document.createRange && window.getSelection) {
+                        range = document.createRange();
+                        sel = window.getSelection();
+                        sel.removeAllRanges();
+                        try {
+                            range.selectNodeContents(el);
+                            sel.addRange(range);
+                        } catch (e) {
+                            range.selectNode(el);
+                            sel.addRange(range);
+                        }
+                    } else if (body.createTextRange) {
+                        range = body.createTextRange();
+                        range.moveToElementText(el);
+                        range.select();
+                    }
+                    document.execCommand("Copy");
+                }
+                function clearSelection() {
+                    if ( document.selection ) {
+                        document.selection.empty();
+                    } else if ( window.getSelection ) {
+                        window.getSelection().removeAllRanges();
+                    }
+                }
+            </script>
+
+            <input type="button" value="Copy Table" style="position:relative;right:150px;bottom:100px;"
+               onclick="selectElementContents( document.getElementById('gradeTable') );clearSelection();">
+
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static',filename='js/ui.js') }}"></script>
+
+</body>
+</html>

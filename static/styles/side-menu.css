@@ -304,3 +304,20 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     color:#2890D1;
     font-size:75pt;
 }
+
+table {
+    border-collapse: collapse;
+    width: 105%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #2890D1;
+    color: white;
+}

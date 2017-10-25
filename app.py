@@ -55,7 +55,7 @@ def logout():
 @gui.route('/')
 @login_required
 def home():
-	return render_template('test.html')
+	return render_template('home.html')
 
 @gui.errorhandler(401)
 def page_not_found(e):
@@ -81,23 +81,28 @@ def teams(team):
 	student = 'Andrew'
 	score = 57
 	scores = [57,64,12,23,80]
-	return render_template(team + '.html', data=data, week = week, people = people,student=student.title(), score = score,scores= scores)
+	teamNumber = team.replace('team','')
+	return render_template('team.html', data=data, week = week, people = people,student=student.title(), score = score,scores= scores, teamNumber=teamNumber)
 
-@gui.route('/<team>/<student>',methods=['GET'])
+# @gui.route('/<team>/<student>',methods=['GET'])
+# @login_required
+# def students(team,student):
+# 	team = team.lower()
+# 	if team not in ['team1','team2','team3','team4','team5','team6','team8','team9','team10']:
+# 		return redirect('/')
+# 	student = student.lower()
+# 	if student not in ['devina','franklin','andrew','rhett','gwynevere','siew','neha','sid','amy','kevin',
+# 						'william','judith','ishan','anthony','aayush','nitin','alex','sam','austin','fiona',
+# 						'christofe','pouriya','varun','mingyang','monika','anushree','vanessa','adam','dong eung',
+# 						'palak','pablo','faraz','jenny','yoonji','arturo','henry','tanvi','bryce','dana','manar',
+# 						'keith','itzel','aneesh','brad','kyle','aneesha','jonathan']:
+# 		return redirect('/')
+# 	scores = [57,64,12,23,80,96]
+# 	return render_template('student.html',student=student.title(), scores = scores)
+
+@gui.route('/grades')
 @login_required
-def students(team,student):
-	team = team.lower()
-	if team not in ['team1','team2','team3','team4','team5','team6','team8','team9','team10']:
-		return redirect('/')
-	student = student.lower()
-	if student not in ['devina','franklin','andrew','rhett','gwynevere','siew','neha','sid','amy','kevin',
-						'william','judith','ishan','anthony','aayush','nitin','alex','sam','austin','fiona',
-						'christofe','pouriya','varun','mingyang','monika','anushree','vanessa','adam','dong eung',
-						'palak','pablo','faraz','jenny','yoonji','arturo','henry','tanvi','bryce','dana','manar',
-						'keith','itzel','aneesh','brad','kyle','aneesha','jonathan']:
-		return redirect('/')
-	scores = [57,64,12,23,80,96]
-	return render_template('student.html',student=student.title(), scores = scores)
-
+def grades():
+	return render_template('grades.html')
 if __name__ == "__main__":
 	gui.run()
