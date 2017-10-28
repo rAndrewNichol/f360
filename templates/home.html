@@ -22,17 +22,18 @@
       <select onchange = "this.form.submit()" name="week">
         <option value="" selected disabled hidden id="current_week">Week</option>
         <option value="0">All</option>
-        <option value="1">Week 1</option>
-        <option value="2">Week 2</option>
-        <option value="3">Week 3</option>
-        <option value="4">Week 4</option>
-        <option value="5">Week 5</option>
+        <option value="1">Project</option>
+        <option value="2">10-31</option>
+        <option value="3">11-07</option>
+        <option value="4">11-14</option>
+        <option value="5">11-21</option>
       </select>
     </form>
 
     <script>
     var url = new URL(window.location.href);
-    var week = url.searchParams.get("week");
+    var week = {{current_week|tojson}};
+    var weeks = {1:"Project",2:"10-31",3:"11-07",4:"11-14",5:"11-21"};
     var output;
     if(week==null){
         // could also do default week 1 or maximum week here.
@@ -42,7 +43,7 @@
         output = "All";
     }
     else{
-        output = "Week " + week;
+        output = weeks[week];
     }
     document.getElementById("current_week").innerHTML = output;
     </script>
