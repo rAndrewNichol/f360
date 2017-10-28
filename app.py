@@ -58,7 +58,10 @@ def logout():
 @gui.route('/')
 @login_required
 def home():
-	return render_template('home.html')
+	current_week = request.args.get('week')
+	if not current_week:
+		current_week = '0';
+	return render_template('home.html',current_week=current_week)
 
 @gui.errorhandler(401)
 def page_not_found(e):
