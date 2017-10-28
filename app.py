@@ -208,7 +208,8 @@ def teams(team):
 			overall_scores.append(round(float(overall[person][0]) / overall[person][1],1))
 
 	return render_template('team.html', weeks_found = weeks_found, current_week = current_week, names = names, 
-							overall_scores=overall_scores, teamNumber=str(teamNumber), scores = scores, full_names=people)
+							overall_scores=overall_scores, teamNumber=str(teamNumber), scores = scores, 
+							full_names=people, num_people = len(people))
 
 # @gui.route('/<team>/<student>',methods=['GET'])
 # @login_required

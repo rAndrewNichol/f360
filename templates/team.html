@@ -99,6 +99,20 @@
         <div class="content">
             {% block body %}
             {% if current_week=='0' %}
+            {% if num_people == 5 %}
+            <div id = "dynamicScores0" class="overall" style="position:relative;right:95px;top:55px;">
+            </div>
+            <div id = "dynamicScores1" class="overall" style="position:relative;right:95px;top:298px;">
+            </div>
+            <div id = "dynamicScores2" class="overall" style="position:relative;right:95px;top:541px;">
+            </div>
+            <div id = "dynamicScores3" class="overall" style="position:relative;right:95px;top:784px;">
+            </div>
+            <div id = "dynamicScores4" class="overall" style="position:relative;right:95px;top:1027px;">
+            </div>
+            
+            {% else %}
+
             <div id = "dynamicScores0" class="overall" style="position:relative;right:95px;top:55px;">
             </div>
             <div id = "dynamicScores1" class="overall" style="position:relative;right:95px;top:298px;">
@@ -110,7 +124,8 @@
             <div id = "dynamicScores4" class="overall" style="position:relative;right:95px;top:1027px;">
             </div>
             <div id = "dynamicScores5" class="overall" style="position:relative;right:95px;top:1270px;">
-            </div>      
+            </div>  
+            {% endif %}
             <script>
                 document.getElementById("teamNumber").innerHTML = "Team " + {{teamNumber|tojson}};
                 var names = {{names|tojson}};
@@ -134,7 +149,8 @@
                     scoresDiv.appendChild(h1tag2);
                 }
             </script>
-            
+
+            {% if num_people == 5 %}
             <div style="width:100%;position:relative;bottom:1150px;left:105px">
                 <canvas id="canvas0"></canvas>
             </div>
@@ -150,9 +166,29 @@
             <div style="width:100%;position:relative;bottom:850px;left:105px">
                 <canvas id="canvas4"></canvas>
             </div>
-            <div style="width:100%;position:relative;bottom:775px;left:105px">
+
+            {% else %}
+
+            <div style="width:100%;position:relative;bottom:1380px;left:105px">
+                <canvas id="canvas0"></canvas>
+            </div>
+            <div style="width:100%;position:relative;bottom:1305px;left:105px">
+                <canvas id="canvas1"></canvas>
+            </div>
+            <div style="width:100%;position:relative;bottom:1230px;left:105px">
+                <canvas id="canvas2"></canvas>
+            </div>
+            <div style="width:100%;position:relative;bottom:1155px;left:105px">
+                <canvas id="canvas3"></canvas>
+            </div>
+            <div style="width:100%;position:relative;bottom:1080px;left:105px">
+                <canvas id="canvas4"></canvas>
+            </div>
+            <div style="width:100%;position:relative;bottom:1005px;left:105px">
                 <canvas id="canvas5"></canvas>
             </div>
+
+            {% endif %}
 
             <script>
                 var names = {{names|tojson}};
