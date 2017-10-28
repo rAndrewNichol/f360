@@ -28,17 +28,18 @@
       <select onchange = "this.form.submit()" name="week">
         <option value="" selected disabled hidden id="current_week">Week</option>
         <option value="0">All</option>
-        <option value="1">Week 1</option>
-        <option value="2">Week 2</option>
-        <option value="3">Week 3</option>
-        <option value="4">Week 4</option>
-        <option value="5">Week 5</option>
+        <option value="1">Project</option>
+        <option value="2">10-31</option>
+        <option value="3">11-07</option>
+        <option value="4">11-14</option>
+        <option value="5">11-21</option>
       </select>
     </form>
 
     <script>
     var url = new URL(window.location.href);
-    var week = url.searchParams.get("week");
+    var week = {{current_week|tojson}};
+    var weeks = {1:"Project",2:"10-31",3:"11-07",4:"11-14",5:"11-21"};
     var output;
     if(week==null){
         // could also do default week 1 or maximum week here.
@@ -48,7 +49,7 @@
         output = "All";
     }
     else{
-        output = "Week " + week;
+        output = weeks[week];
     }
     document.getElementById("current_week").innerHTML = output;
     </script>
@@ -97,29 +98,29 @@
 
         <div class="content">
             {% block body %}
-            {% if week=='0' %}
-            <div id = "dynamicScores0" class="overall" style="position:relative;right:100px;top:55px;">
+            {% if current_week=='0' %}
+            <div id = "dynamicScores0" class="overall" style="position:relative;right:95px;top:55px;">
             </div>
-            <div id = "dynamicScores1" class="overall" style="position:relative;right:100px;top:298px;">
+            <div id = "dynamicScores1" class="overall" style="position:relative;right:95px;top:298px;">
             </div>
-            <div id = "dynamicScores2" class="overall" style="position:relative;right:100px;top:541px;">
+            <div id = "dynamicScores2" class="overall" style="position:relative;right:95px;top:541px;">
             </div>
-            <div id = "dynamicScores3" class="overall" style="position:relative;right:100px;top:784px;">
+            <div id = "dynamicScores3" class="overall" style="position:relative;right:95px;top:784px;">
             </div>
-            <div id = "dynamicScores4" class="overall" style="position:relative;right:100px;top:1027px;">
+            <div id = "dynamicScores4" class="overall" style="position:relative;right:95px;top:1027px;">
             </div>
-            <div id = "dynamicScores5" class="overall" style="position:relative;right:100px;top:1270px;">
+            <div id = "dynamicScores5" class="overall" style="position:relative;right:95px;top:1270px;">
             </div>      
             <script>
                 document.getElementById("teamNumber").innerHTML = "Team " + {{teamNumber|tojson}};
-                var people = {{people|tojson}};
-                var scores = {{scores|tojson}};
-                for(i=0;i<people.length;i++){
+                var names = {{names|tojson}};
+                var overall_scores = {{overall_scores|tojson}};
+                for(i=0;i<names.length;i++){
                     var scoresDiv = document.getElementById("dynamicScores" + i);
                     var h1tag1 = document.createElement('h1');
                     // h1tag1.setAttribute('id','studentName');
                     h1tag1.id = "studentName";
-                    h1tag1.innerHTML = "" + people[i];
+                    h1tag1.innerHTML = "" + names[i];
                     var h2tag = document.createElement('h2');
                     h2tag.id = "average";
                     // h2tag.setAttribute('id','average');
@@ -127,7 +128,7 @@
                     var h1tag2 = document.createElement('h1');
                     h1tag2.id = "studentOverall";
                     // h1tag2.setAttribute = ('id','studentOverall');
-                    h1tag2.innerHTML = "" + scores[i];
+                    h1tag2.innerHTML = "" + overall_scores[i];
                     scoresDiv.appendChild(h1tag1);
                     scoresDiv.appendChild(h2tag);
                     scoresDiv.appendChild(h1tag2);
@@ -154,71 +155,84 @@
             </div>
 
             <script>
-                var people = {{people|tojson}};
-                var config = {
-                    type: 'line',
-                    data: {
-                        labels: ["10/22/2017","10/29/2017","11/5/2017","11/12/2017"],
-                        datasets: [{
-                            label: "Performance",
-                            backgroundColor: window.chartColors.red,
-                            borderColor: window.chartColors.red,
-                            data: [
-                                57,86,30,76
-                            ],
-                            fill: false,
-                        }]
-                    },
-                    options: {
-                        legend: {
-                            display: false
-                        },
-                        responsive: true,
-                        title:{
-                            display:false,
-                            text:'Weekly Performance'
-                        },
-                        tooltips: {
-                            mode: 'index',
-                            intersect: false,
-                        },
-                        hover: {
-                            mode: 'nearest',
-                            intersect: true
-                        },
-                        elements:{
-                            line:{
-                                tension:0
-                            }
-                        },
-                        scales: {
-                            xAxes: [{
-                                display: true,
-                                scaleLabel: {
-                                    display: true,
-                                    labelString: 'Week'
-                                }
-                            }],
-                            yAxes: [{
-                                display: true,
-                                scaleLabel: {
-                                    display: true,
-                                    labelString: 'Score'
-                                },
-                                ticks:{
-                                    suggestedMin:0,
-                                    suggestedMax:100
-                                }
-                            }]
+                var names = {{names|tojson}};
+                var full_names = {{full_names|tojson}};
+                var weeks = {{weeks_found|tojson}};
+                var scores = {{scores|tojson}};
+                var configs = [];
+                for(i=0;i<full_names.length;i++){
+                    var data = [];
+                    for(j=0;j<weeks.length;j++){
+                        if(full_names[i] in scores[weeks[j]] && 'others_rating' in scores[weeks[j]][full_names[i]]){
+                            data.push(scores[weeks[j]][full_names[i]]['others_rating'][0]);
+                        }else{
+                            data.push(0);
                         }
                     }
-                };
+                    configs.push({
+                        type: 'line',
+                        data: {
+                            labels: weeks,
+                            datasets: [{
+                                label: "Performance",
+                                backgroundColor: window.chartColors.red,
+                                borderColor: window.chartColors.red,
+                                data: data,
+                                fill: false,
+                            }]
+                        },
+                        options: {
+                            legend: {
+                                display: false
+                            },
+                            responsive: true,
+                            title:{
+                                display:false,
+                                text:'Weekly Performance'
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            elements:{
+                                line:{
+                                    tension:0
+                                }
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Week'
+                                    }
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Score'
+                                    },
+                                    ticks:{
+                                        suggestedMin:0,
+                                        suggestedMax:100
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
+                }
 
                 window.onload = function(){
                     var ctxs = [];
-                    for(i = 0; i < people.length; i++){
+                    for(i = 0; i < full_names.length; i++){
                         ctxs.push(document.getElementById("canvas"+i).getContext("2d"));
-                        window.myLine = new Chart(ctxs[i],config);
+                        window.myLine = new Chart(ctxs[i],configs[i]);
                     }
                 };
 
@@ -226,49 +240,46 @@
 
             {% else %}
 
-<!--             <div class="dropdown">
-              <button class="dropbtn">Details</button>
-              <div class="dropdown-content">
-                <a href="/team1/andrew">Andrew</a>
-                <a href="#">Judith</a>
-                <a href="#">Palak</a>
-                <a href="#">Cristofe</a>
-                <a href="#">Dana</a>
-              </div>
-            </div> -->
 
              <div id="container" style="width: 100%;position:relative;top:40px;">
                 <canvas id="canvas"></canvas>
             </div>
 
             <script>
+                var weeks = {1:"Project",2:"10-31",3:"11-07",4:"11-14",5:"11-21"};
                 var color = Chart.helpers.color;
+                var names = {{names|tojson}};
+                var full_names = {{full_names|tojson}};
+                var scores = {{scores|tojson}}
+                var current_week = weeks[{{current_week|tojson}}];
+                var self_data = [];
+                var peer_data = [];
+                for(i=0;i<full_names.length;i++){
+                    if(full_names[i] in scores[current_week] && 'self_rating' in scores[current_week][full_names[i]]){
+                        self_data.push(scores[current_week][full_names[i]]['self_rating']);
+                    }else{
+                        self_data.push(0);
+                    }
+                    if(full_names[i] in scores[current_week] && 'others_rating' in scores[current_week][full_names[i]]){
+                        peer_data.push(scores[current_week][full_names[i]]['others_rating'][0]);
+                    }else{
+                        peer_data.push(0);
+                    }
+                }
                 var barChartData = {
-                    labels: {{ people|tojson }},
+                    labels: names,
                     datasets: [{
                         label: 'Self Score',
                         backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
                         borderColor: window.chartColors.red,
                         borderWidth: 1,
-                        data: [
-                            99,
-                            32,
-                            45,
-                            100,
-                            68
-                        ]
+                        data: self_data
                     }, {
                         label: 'Peer Score',
                         backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
                         borderColor: window.chartColors.blue,
                         borderWidth: 1,
-                        data: [
-                            64,
-                            97,
-                            37,
-                            40,
-                            80
-                        ]
+                        data: peer_data
                     }]
 
                 };
@@ -298,7 +309,7 @@
                                 },
                             title: {
                                 display: false,
-                                text: 'Week ' + {{week}} + ' Scores'
+                                text: 'Week ' + {{current_week}} + ' Scores'
                             }
                         }
                     });
