@@ -68,25 +68,29 @@
                 <th>Overall Score</th>
                 <th>Suggested Grade</th>
               </tr>
-              <tr>
-                <td>Andrew Nichol</td>
-                <td>0</td>
-                <td>67</td>
-                <td>83</td>
-              </tr>
-              <tr>
-                <td>Judith Syau</td>
-                <td>1</td>
-                <td>42</td>
-                <td>64</td>
-              </tr>
-              <tr>
-                <td>Palak Thakur</td>
-                <td>0</td>
-                <td>80</td>
-                <td>89</td>
-              </tr>
             </table>
+            <script>
+                var scores  = {{overall|tojson}}
+                var table = document.getElementById("gradeTable");
+                // var people = Object.keys(scores);
+                for(person in scores){
+                    // person = people[i];
+                    var tr = document.createElement('tr');
+                    var td1 = document.createElement('td');
+                    td1.innerHTML = person.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+                    var td2 = document.createElement('td');
+                    td2.innerHTML = scores[person][2].toString();
+                    var td3 = document.createElement('td');
+                    td3.innerHTML = scores[person][1].toString();
+                    var td4 = document.createElement('td');
+                    td4.innerHTML = scores[person][0].toString();
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    tr.appendChild(td3);
+                    tr.appendChild(td4);
+                    table.appendChild(tr);
+                }
+            </script>
 
             <script type="text/javascript">
                 function selectElementContents(el) {
@@ -118,7 +122,7 @@
                 }
             </script>
 
-            <input type="button" value="Copy Table" style="position:relative;right:90px;bottom:100px;"
+            <input type="button" value="Copy Table" style="position:relative;right:90px;bottom:1900px;"
                onclick="selectElementContents( document.getElementById('gradeTable') );clearSelection();">
 
         </div>
