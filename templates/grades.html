@@ -14,12 +14,12 @@
 
 <div id="layout">
 
-    <div style = "float:left;padding-left:20px">
+<!--     <div style = "float:left;padding-left:20px">
         <form action="/logout">
         <p>Welcome {{current_user.name}}!</p>
         <input type="submit" value="Logout"/>
         </form>
-    </div>
+    </div> -->
 
     <a href="#menu" id="menuLink" class="menu-link">
         <span></span>
@@ -48,6 +48,13 @@
     <div id="main">
         <div class="header" style="position:relative;right:50px;">
             <h1>Grade Summary</h1>
+        </div>
+
+        <div style = "float:left;position:relative;bottom:115px;left:20px;">
+            <form action="/logout">
+            <p>Welcome {{current_user.name}}!</p>
+            <input type="submit" value="Logout"/>
+            </form>
         </div>
 
         <div class="content">
