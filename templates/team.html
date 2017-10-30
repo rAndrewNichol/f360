@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="This is an exclusive TA environment for reviewing team feedback.">
-    <title>Welcome!</title>
+    <meta name="description" content="Team feedback review.">
+    <title>Teams!</title>
 
     <script src="{{ url_for('static',filename='js/chart.js') }}"></script>
     <script src="{{ url_for('static',filename='js/utils.js') }}"></script>
@@ -42,7 +42,6 @@
     var weeks = {1:"Project",2:"10-31",3:"11-07",4:"11-14",5:"11-21"};
     var output;
     if(week==null){
-        // could also do default week 1 or maximum week here.
         output = "Week";
     }
     else if(week==0){
@@ -61,7 +60,6 @@
         <input type="submit" value="Logout"/>
         </form>
     </div>
-    <!-- Menu toggle -->
 
     <a href="#menu" id="menuLink" class="menu-link">
         <span></span>
