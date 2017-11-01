@@ -110,7 +110,6 @@ def teams(team):
 			return (None, None)
 
 	def process(data, people):
-		processed = {}
 		persons_covered = set(people)
 		scores = {}
 		for person in persons_covered:
@@ -217,6 +216,12 @@ def teams(team):
 @gui.route('/grades')
 @login_required
 def grades():
+	now = datetime.now()
+	to_due = {"Project":datetime.strptime("2017-11-02 00:00:00","%Y-%m-%d %H:%M:%S"),
+				"10-31":datetime.strptime("2017-11-07 00:00:00","%Y-%m-%d %H:%M:%S"),
+				"11-07":datetime.strptime("2017-11-14 00:00:00","%Y-%m-%d %H:%M:%S"),
+				"11-14":datetime.strptime("2017-11-21 00:00:00","%Y-%m-%d %H:%M:%S"),
+				"11-21":datetime.strptime("2017-11-28 00:00:00","%Y-%m-%d %H:%M:%S"),}
 	to_week = {
 		"10-26":"Project","10-27":"Project","10-28":"Project","10-29":"Project","10-30":"Project",
 		"10-31":"Project","11-01":"Project",
@@ -262,9 +267,7 @@ def grades():
 		else:
 			return (None, None)
 
-	def process(data, team):
-		people = teams[team]
-		processed = {}
+	def process(data, people, week):
 		persons_covered = set(people)
 		scores = {}
 		for person in persons_covered:
@@ -301,7 +304,7 @@ def grades():
 				return scores
 
 		for person in people:
-			if person in persons_covered:
+			if person in persons_covered and now > to_due[week]:
 				scores[person]['missed'] = 1
 			else:
 				scores[person]['missed'] = 0
@@ -310,9 +313,12 @@ def grades():
 
 	db = pymysql.connect(host='us-cdbr-iron-east-05.cleardb.net',port='',user='bda0f11ccb424e',passwd='1e1bf253',db='heroku_55f2adb0c8d05ac')
 	cur = db.cursor()
-	all = """SELECT * FROM responses;"""
-	cur.execute(all)
+	alls = """SELECT * FROM responses;"""
+	cur.execute(alls)
 	data =  cur.fetchall() 
+	alls = """SELECT * FROM previous;"""
+	cur.execute(alls)
+	previous_data = cur.fetchall()
 	db.close()
 
 	weeks = {}
@@ -333,13 +339,43 @@ def grades():
 		scores[team] = {}
 		for week in weeks_found:
 			scores[team][week] = process(sorted([line for line in weeks[week] if line[1].strip().lower() in teams[team]],reverse = True, 
-													key = lambda x:datetime.strptime(x[64], '%Y-%m-%d %H:%M:%S')),team)
+													key = lambda x:datetime.strptime(x[64], '%Y-%m-%d %H:%M:%S')),teams[team], week)
 
+	previous_teams = {
+	1:['william sheng','austin vuong','keith sollers','kevin van der eijk','andrew nichol'],
+	2:['aneesh chimbili','bryce king','dong eun suh','fiona xie','mingyang zhou'],
+	3:['alexander wing','anushree bhimani','christofe survian','judith syau','palak thakur'],
+	4:['bradford bruenell','ishan sharma','pedro pablo correa hucke','pouriya bagheri','samantha cristol'],
+	5:['aneesha lugani','anthony blair','gwynevere hunger','kyle geitner','rhett gentile'],
+	6:['aayush patel','adam dada','devina darmawan','siew hong ma','manar safi'],
+	7:['henry keenan','monica kumaran'],
+	8:['amy philip','jenny liu','neha burli','nitin manivasagan','tanvi mongia'],
+	9:['arturo roman ordaz','dana wu','franklin rice','sid iyer','yoonji lu'],
+	10:['faraz kahen','itzel romero','jonathan archer','vanessa salas','varun agarwal']
+	}
+
+	previous_scores = {}
+	for team in previous_teams:
+		previous_scores[team] = process(sorted([line for line in previous_data if line[1].strip().lower() in previous_teams[team] and get_week(line[64])=="Project"],reverse = True, 
+													key = lambda x:datetime.strptime(x[64], '%Y-%m-%d %H:%M:%S')),previous_teams[team], week = "Project")
+
+	# print previous_scores
 
 	overall = {}
-	for team in teams:
-		for person in teams[team]:
+	for team in previous_teams:
+		for person in previous_teams[team]:
 			overall[person] = [0,0,0,[]]
+			if 'others_rating' in previous_scores[team][person]:
+				overall[person][0] += previous_scores[team][person]['others_rating'][0] * previous_scores[team][person]['others_rating'][1]
+				overall[person][1] += previous_scores[team][person]['others_rating'][1]
+			if 'missed' in previous_scores[team][person]:
+				overall[person][2] += previous_scores[team][person]['missed']
+			if 'scores_given' in previous_scores[team][person]:
+				overall[person][3].extend(previous_scores[team][person]['scores_given'])
+
+	# print overall
+
+	for team in teams:
 		for week in scores[team]:
 			for person in scores[team][week]:
 				if 'others_rating' in scores[team][week][person]:
@@ -349,6 +385,8 @@ def grades():
 					overall[person][2] += scores[team][week][person]['missed']
 				if 'scores_given' in scores[team][week][person]:
 					overall[person][3].extend(scores[team][week][person]['scores_given']) 
+
+	# print overall
 
 	team_avgs = []
 	for team in teams:
