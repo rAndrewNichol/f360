@@ -3,6 +3,7 @@ import pymysql
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from datetime import datetime
 from numpy import std, arange, mean
+from pytz import timezone, utc
 
 gui = Flask(__name__)
 gui.config.from_object('config')
@@ -208,7 +209,7 @@ def teams(team):
 			overall_scores.append(0)
 		else:
 			overall_scores.append(round(float(overall[person][0]) / overall[person][1],1))
-	print scores
+	# print scores
 	return render_template('team.html', weeks_found = weeks_found, current_week = current_week, names = names, 
 							overall_scores=overall_scores, teamNumber=str(teamNumber), scores = scores, 
 							full_names=people, num_people = len(people))
@@ -216,7 +217,8 @@ def teams(team):
 @gui.route('/grades')
 @login_required
 def grades():
-	now = datetime.now()
+	now = datetime.now(tz=timezone('US/Pacific')).replace(tzinfo=None)
+	# print now
 	to_due = {"Project":datetime.strptime("2017-11-02 00:00:00","%Y-%m-%d %H:%M:%S"),
 				"10-31":datetime.strptime("2017-11-07 00:00:00","%Y-%m-%d %H:%M:%S"),
 				"11-07":datetime.strptime("2017-11-14 00:00:00","%Y-%m-%d %H:%M:%S"),
