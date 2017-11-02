@@ -277,6 +277,7 @@
             </div>
 
             <script>
+                document.getElementById("teamNumber").innerHTML = "Team " + {{teamNumber|tojson}};
                 var weeks = {1:"Project",2:"10-31",3:"11-07",4:"11-14",5:"11-21"};
                 var color = Chart.helpers.color;
                 var names = {{names|tojson}};
