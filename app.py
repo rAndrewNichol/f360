@@ -105,7 +105,7 @@ def teams(team):
 
 	def hundredize(rates):
 		if len(filter(None,rates)) == len(rates):
-			return (sum(rates[:7]) * float(2.5), {"strong":rates[7],"improve":rates[8]})
+			return (sum(rates[:7]) * float(2.5), {"strong":rates[7].decode('utf-8','ignore'),"improve":rates[8].decode('utf-8','ignore')})
 		else:
 			return (None, None)
 
@@ -208,7 +208,7 @@ def teams(team):
 			overall_scores.append(0)
 		else:
 			overall_scores.append(round(float(overall[person][0]) / overall[person][1],1))
-
+	print scores
 	return render_template('team.html', weeks_found = weeks_found, current_week = current_week, names = names, 
 							overall_scores=overall_scores, teamNumber=str(teamNumber), scores = scores, 
 							full_names=people, num_people = len(people))
@@ -263,7 +263,7 @@ def grades():
 
 	def hundredize(rates):
 		if len(filter(None,rates)) == len(rates):
-			return (sum(rates[:7]) * float(2.5), {"strong":rates[7],"improve":rates[8]})
+			return (sum(rates[:7]) * float(2.5), {"strong":rates[7].decode('utf-8','ignore'),"improve":rates[8].decode('utf-8','ignore')})
 		else:
 			return (None, None)
 
