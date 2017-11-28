@@ -425,7 +425,7 @@ def grades():
 	for person in overall:
 		overall[person][0] = 85 + (8 * ( (overall[person][0] - class_avg )/class_sd ))
 
-	sd_adjustments = [round(step - 4.6,1) for step in arange(0,9.4,.2)]
+	sd_adjustments = [round(step - 2.3,1) for step in arange(0,4.7,.1)]
 
 	sorted_by_sd = sorted(overall.keys(), key = lambda x: overall[x][3])
 	for i in xrange(len(sorted_by_sd)):
